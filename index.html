@@ -32,20 +32,30 @@
     /* Bandeau soldes, coin haut droit */
     .sale-ribbon {
       position: fixed;
-      top: 26px;
-      right: -52px;
-      width: 200px;
-      padding: 8px 0;
+      top: 52px;
+      right: -86px;
+      width: 340px;
+      padding: 14px 0;
       transform: rotate(45deg);
       background: var(--sale);
       color: #fff;
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 24px;
       letter-spacing: 0.08em;
-      box-shadow: 0 4px 18px rgba(255, 61, 110, 0.35);
+      border-top: 2px dashed rgba(255, 255, 255, 0.6);
+      border-bottom: 2px dashed rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 32px rgba(255, 61, 110, 0.7);
       z-index: 10;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 24px rgba(255, 61, 110, 0.55); }
+      50% { box-shadow: 0 0 48px rgba(255, 61, 110, 0.95); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sale-ribbon { animation: none; }
     }
 
     header { padding: 28px 0; }
@@ -164,6 +174,7 @@
     @media (max-width: 760px) {
       .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 16px; }
       .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sale-ribbon { top: 38px; right: -72px; width: 270px; padding: 10px 0; font-size: 18px; }
       .glyph { font-size: 17px; }
     }
   </style>
