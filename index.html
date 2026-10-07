@@ -80,7 +80,34 @@
       border-radius: 24px;
       padding: 24px;
     }
-    .shirt-stage svg { display: block; width: 100%; height: auto; }
+    .shirt-stage svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform-origin: 50% 10%;
+      animation: sway 6s ease-in-out infinite;
+    }
+    @keyframes sway {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-10px) rotate(1deg); }
+    }
+    /* Les neurones s'allument l'un après l'autre */
+    .neurons circle {
+      animation: blink 3s ease-in-out infinite;
+    }
+    .neurons circle:nth-child(2) { animation-delay: 0.4s; }
+    .neurons circle:nth-child(3) { animation-delay: 0.8s; }
+    .neurons circle:nth-child(4) { animation-delay: 1.2s; }
+    .neurons circle:nth-child(5) { animation-delay: 1.6s; }
+    .neurons circle:nth-child(6) { animation-delay: 2s; }
+    .neurons circle:nth-child(7) { animation-delay: 2.4s; }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .shirt-stage svg, .neurons circle { animation: none; }
+    }
     .eyebrow {
       font-family: 'JetBrains Mono', monospace;
       color: var(--accent);
@@ -261,7 +288,7 @@
               <line x1="200" y1="140" x2="250" y2="175"/><line x1="200" y1="190" x2="250" y2="175"/><line x1="200" y1="240" x2="250" y2="175"/>
               <line x1="200" y1="140" x2="250" y2="215"/><line x1="200" y1="190" x2="250" y2="215"/><line x1="200" y1="240" x2="250" y2="215"/>
             </g>
-            <g fill="#0e9f6e">
+            <g class="neurons" fill="#0e9f6e">
               <circle cx="150" cy="160" r="7"/><circle cx="150" cy="220" r="7"/>
               <circle cx="200" cy="140" r="7"/><circle cx="200" cy="190" r="7"/><circle cx="200" cy="240" r="7"/>
               <circle cx="250" cy="175" r="7"/><circle cx="250" cy="215" r="7"/>
