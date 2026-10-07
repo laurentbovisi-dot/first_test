@@ -3,38 +3,370 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New York</title>
+  <title>Ttttt-Shirt</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
+    :root {
+      --bg: #07080c;
+      --surface: #10121a;
+      --border: #1e2230;
+      --text: #e8eaf0;
+      --muted: #8a90a2;
+      --accent: #7cf7c8;
+      --sale: #ff3d6e;
     }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #000;
-      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
     }
-    .tag {
-      margin: 0;
-      padding: 0 16px;
-      font-family: 'Permanent Marker', cursive;
-      font-weight: normal;
-      font-size: clamp(3rem, 14vw, 10rem);
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+    /* Bandeau soldes, coin haut droit */
+    .sale-ribbon {
+      position: fixed;
+      top: 52px;
+      right: -86px;
+      width: 340px;
+      padding: 14px 0;
+      transform: rotate(45deg);
+      background: var(--sale);
       color: #fff;
-      transform: rotate(-8deg);
-      text-shadow:
-        3px 3px 0 #e6007e,
-        6px 6px 0 #00b4ff,
-        0 0 25px rgba(230, 0, 126, 0.6);
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 0.08em;
+      border-top: 2px dashed rgba(255, 255, 255, 0.6);
+      border-bottom: 2px dashed rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 32px rgba(255, 61, 110, 0.7);
+      z-index: 10;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 24px rgba(255, 61, 110, 0.55); }
+      50% { box-shadow: 0 0 48px rgba(255, 61, 110, 0.95); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sale-ribbon { animation: none; }
+    }
+
+    header { padding: 28px 0; }
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.02em;
+    }
+    .logo span { color: var(--accent); }
+
+    /* T-shirt présenté */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 40px 0 80px;
+    }
+    .shirt-stage {
+      background: radial-gradient(circle at 50% 40%, #161a26 0%, var(--bg) 70%);
+      border-radius: 24px;
+      padding: 24px;
+    }
+    .shirt-stage svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform-origin: 50% 10%;
+      animation: sway 6s ease-in-out infinite;
+    }
+    @keyframes sway {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-10px) rotate(1deg); }
+    }
+    /* Les neurones s'allument l'un après l'autre */
+    .neurons circle {
+      animation: blink 3s ease-in-out infinite;
+    }
+    .neurons circle:nth-child(2) { animation-delay: 0.4s; }
+    .neurons circle:nth-child(3) { animation-delay: 0.8s; }
+    .neurons circle:nth-child(4) { animation-delay: 1.2s; }
+    .neurons circle:nth-child(5) { animation-delay: 1.6s; }
+    .neurons circle:nth-child(6) { animation-delay: 2s; }
+    .neurons circle:nth-child(7) { animation-delay: 2.4s; }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .shirt-stage svg, .neurons circle { animation: none; }
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.1;
+      margin: 12px 0 16px;
+      font-weight: 700;
+    }
+    .desc { color: var(--muted); max-width: 42ch; margin: 0 0 28px; }
+    .price { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; }
+    .price .now { font-size: 2rem; font-weight: 700; }
+    .price .old { color: var(--muted); text-decoration: line-through; }
+    .price .tag {
+      color: var(--sale);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .sizes { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+    .sizes span {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #05120d;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+    }
+
+    /* Symboles geeks */
+    .symbols { padding: 40px 0 100px; border-top: 1px solid var(--border); }
+    h2 { font-size: 1.5rem; margin: 40px 0 8px; }
+    .sub { color: var(--muted); margin: 0 0 32px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 16px 20px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .glyph {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 24px;
+      white-space: nowrap;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .glyph svg { width: 64px; height: 64px; }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    footer .logo { color: var(--text); font-size: 18px; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; gap: 24px; padding-top: 16px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sale-ribbon { top: 38px; right: -72px; width: 270px; padding: 10px 0; font-size: 18px; }
+      .glyph { font-size: 17px; }
     }
   </style>
 </head>
 <body>
-  <h1 class="tag">New York</h1>
+  <div class="sale-ribbon">SALES −25%</div>
+
+  <header>
+    <div class="wrap">
+      <div class="logo">Ttttt<span>-</span>Shirt</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="shirt-stage">
+        <svg viewBox="0 0 400 420" aria-label="T-shirt blanc avec un réseau de neurones imprimé">
+          <defs>
+            <!-- Ombrage du tissu : bords plus sombres, centre éclairé -->
+            <linearGradient id="fabric" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#c9ced8"/>
+              <stop offset="0.18" stop-color="#e6e9ef"/>
+              <stop offset="0.5" stop-color="#f7f8fa"/>
+              <stop offset="0.82" stop-color="#e6e9ef"/>
+              <stop offset="1" stop-color="#c3c8d2"/>
+            </linearGradient>
+            <linearGradient id="fabricV" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#000" stop-opacity="0"/>
+              <stop offset="0.85" stop-color="#000" stop-opacity="0"/>
+              <stop offset="1" stop-color="#000" stop-opacity="0.08"/>
+            </linearGradient>
+            <filter id="drop" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#000" flood-opacity="0.55"/>
+            </filter>
+            <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+            <clipPath id="shirtClip">
+              <path id="shirtShape" d="M150 46 C134 52 112 58 92 66 C70 76 52 108 34 150 C50 160 68 170 86 177 C96 160 104 146 112 136 C114 200 114 300 116 384 C170 392 230 392 284 384 C286 300 286 200 288 136 C296 146 304 160 314 177 C332 170 350 160 366 150 C348 108 330 76 308 66 C288 58 266 52 250 46 C240 72 222 86 200 86 C178 86 160 72 150 46 Z"/>
+            </clipPath>
+          </defs>
+
+          <!-- Intérieur du col (dos visible) -->
+          <path d="M150 46 C160 62 178 70 200 70 C222 70 240 62 250 46 C232 40 168 40 150 46 Z" fill="#b8bec9"/>
+
+          <!-- Corps -->
+          <use href="#shirtShape" fill="url(#fabric)" filter="url(#drop)"/>
+          <g clip-path="url(#shirtClip)">
+            <rect width="400" height="420" fill="url(#fabricV)"/>
+            <!-- Plis -->
+            <g fill="none" stroke-linecap="round" filter="url(#soft)">
+              <path d="M112 140 C130 150 140 170 142 196" stroke="#9aa1ae" stroke-width="6" opacity="0.35"/>
+              <path d="M288 140 C270 150 260 170 258 196" stroke="#9aa1ae" stroke-width="6" opacity="0.35"/>
+              <path d="M140 330 C150 350 156 370 158 392" stroke="#9aa1ae" stroke-width="5" opacity="0.25"/>
+              <path d="M262 320 C252 345 248 368 246 392" stroke="#9aa1ae" stroke-width="5" opacity="0.25"/>
+              <path d="M70 120 C80 140 90 156 100 168" stroke="#9aa1ae" stroke-width="5" opacity="0.3"/>
+              <path d="M330 120 C320 140 310 156 300 168" stroke="#9aa1ae" stroke-width="5" opacity="0.3"/>
+              <path d="M150 120 C170 112 230 112 250 120" stroke="#ffffff" stroke-width="10" opacity="0.5"/>
+            </g>
+            <!-- Coutures d'emmanchure -->
+            <g fill="none" stroke="#aeb4c0" stroke-width="1.5" opacity="0.8">
+              <path d="M92 66 C104 90 110 112 112 136"/>
+              <path d="M308 66 C296 90 290 112 288 136"/>
+            </g>
+          </g>
+
+          <!-- Bord-côte du col -->
+          <path d="M150 46 C160 72 178 86 200 86 C222 86 240 72 250 46" fill="none" stroke="#d9dde4" stroke-width="9" stroke-linecap="round"/>
+          <path d="M150 46 C160 72 178 86 200 86 C222 86 240 72 250 46" fill="none" stroke="#b3b9c4" stroke-width="1" stroke-dasharray="2 3" transform="translate(0 5)"/>
+
+          <!-- Surpiqûres des manches et de l'ourlet -->
+          <g fill="none" stroke="#aab0bc" stroke-width="1.2" stroke-dasharray="3 3">
+            <path d="M42 146 C56 154 70 162 84 168"/>
+            <path d="M358 146 C344 154 330 162 316 168"/>
+            <path d="M117 376 C170 384 230 384 283 376"/>
+          </g>
+
+          <!-- Contour léger -->
+          <use href="#shirtShape" fill="none" stroke="#b9bfca" stroke-width="1.2"/>
+
+          <!-- Impression : réseau de neurones -->
+          <g opacity="0.92">
+            <g stroke="#0e9f6e" stroke-width="1.4" opacity="0.6">
+              <line x1="150" y1="160" x2="200" y2="140"/><line x1="150" y1="160" x2="200" y2="190"/><line x1="150" y1="160" x2="200" y2="240"/>
+              <line x1="150" y1="220" x2="200" y2="140"/><line x1="150" y1="220" x2="200" y2="190"/><line x1="150" y1="220" x2="200" y2="240"/>
+              <line x1="200" y1="140" x2="250" y2="175"/><line x1="200" y1="190" x2="250" y2="175"/><line x1="200" y1="240" x2="250" y2="175"/>
+              <line x1="200" y1="140" x2="250" y2="215"/><line x1="200" y1="190" x2="250" y2="215"/><line x1="200" y1="240" x2="250" y2="215"/>
+            </g>
+            <g class="neurons" fill="#0e9f6e">
+              <circle cx="150" cy="160" r="7"/><circle cx="150" cy="220" r="7"/>
+              <circle cx="200" cy="140" r="7"/><circle cx="200" cy="190" r="7"/><circle cx="200" cy="240" r="7"/>
+              <circle cx="250" cy="175" r="7"/><circle cx="250" cy="215" r="7"/>
+            </g>
+            <text x="200" y="290" text-anchor="middle" fill="#10121a" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">&lt;/think&gt;</text>
+          </g>
+        </svg>
+      </div>
+
+      <div>
+        <div class="eyebrow">Collection IA · Nouveau</div>
+        <h1>Neural Net Tee</h1>
+        <p class="desc">Un réseau de neurones minimaliste imprimé en vert sur coton bio blanc. Pour celles et ceux qui pensent en couches cachées.</p>
+        <div class="price">
+          <span class="now">24 €</span>
+          <span class="old">32 €</span>
+          <span class="tag">−25%</span>
+        </div>
+        <div class="sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+        <a class="btn" href="#">Ajouter au panier</a>
+      </div>
+    </section>
+
+    <section class="symbols">
+      <h2>Les symboles</h2>
+      <p class="sub">Choisissez votre motif, on l'imprime sur le t-shirt.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="glyph">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <rect x="14" y="20" width="36" height="28" rx="6"/>
+              <line x1="32" y1="20" x2="32" y2="10"/><circle cx="32" cy="8" r="3" fill="currentColor"/>
+              <circle cx="25" cy="33" r="3" fill="currentColor"/><circle cx="39" cy="33" r="3" fill="currentColor"/>
+              <line x1="25" y1="41" x2="39" y2="41"/>
+            </svg>
+          </div>
+          <p>Robot</p>
+        </div>
+        <div class="card"><div class="glyph">&lt;/AI&gt;</div><p>Balise IA</p></div>
+        <div class="card">
+          <div class="glyph">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3">
+              <rect x="16" y="16" width="32" height="32" rx="4"/>
+              <rect x="25" y="25" width="14" height="14" rx="2" fill="currentColor"/>
+              <path d="M24 16V8M32 16V8M40 16V8M24 56v-8M32 56v-8M40 56v-8M16 24H8M16 32H8M16 40H8M56 24h-8M56 32h-8M56 40h-8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p>GPU</p>
+        </div>
+        <div class="card"><div class="glyph">&gt; prompt_</div><p>Prompt</p></div>
+        <div class="card"><div class="glyph">∇ loss</div><p>Gradient</p></div>
+        <div class="card">
+          <div class="glyph">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <path d="M6 32 Q32 8 58 32 Q32 56 6 32 Z"/>
+              <text x="32" y="38" text-anchor="middle" fill="currentColor" stroke="none" font-family="JetBrains Mono, monospace" font-size="15" font-weight="700">01</text>
+            </svg>
+          </div>
+          <p>Œil binaire</p>
+        </div>
+        <div class="card"><div class="glyph">if (sentient)</div><p>Conscience</p></div>
+        <div class="card"><div class="glyph">P(ok|AI)</div><p>Probabilité</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <div class="logo">Ttttt<span style="color: var(--accent)">-</span>Shirt</div>
+        <div>T-shirts geeks · Thème intelligence artificielle</div>
+      </div>
+      <div>
+        <div><strong style="color: var(--text)">Contact</strong></div>
+        <div><a href="mailto:hello@ttttt-shirt.example">hello@ttttt-shirt.example</a></div>
+        <div>12 rue du Code, 75000 Paris</div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
